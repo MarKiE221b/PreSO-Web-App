@@ -94,111 +94,118 @@ const Dashboard = () => {
 
         <div className="grid grid-rows-1 gap-5 md:grid-cols-2">
           {/* Notification */}
-          <div className="overflow-x-auto max-h-[500px]  rounded-box">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th className="text-base">Notifications</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
-                <tr>
-                  <td className="py-1">
-                    <div role="alert" className="alert bg-base-100 shadow-lg">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        className="stroke-info h-6 w-6 shrink-0"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
-                      <div>
-                        <h3 className="font-bold">New message!</h3>
-                        <div className="text-xs">You have 1 unread message</div>
+          <div className="">
+            <h3 className="mb-3 px-5 font-semibold">Notifications</h3>
+            <div className="overflow-x-auto max-h-[500px]">
+              <table className="table ">
+                {/* head */}
+                <thead></thead>
+                <tbody>
+                  {/* row 1 */}
+                  <tr>
+                    <td className="py-1">
+                      <div role="alert" className="alert bg-base-100 shadow-lg">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="stroke-info h-6 w-6 shrink-0"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <div>
+                          <h3 className="font-bold">New message!</h3>
+                          <div className="text-xs">
+                            You have 1 unread message
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
 
-                <tr>
-                  <td className="py-1">
-                    <div role="alert" className="alert bg-base-100 shadow-lg">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        className="stroke-info h-6 w-6 shrink-0"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
-                      <div>
-                        <h3 className="font-bold">New message!</h3>
-                        <div className="text-xs">You have 1 unread message</div>
+                  <tr>
+                    <td className="py-1">
+                      <div role="alert" className="alert bg-base-100 shadow-lg">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="stroke-info h-6 w-6 shrink-0"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <div>
+                          <h3 className="font-bold">New message!</h3>
+                          <div className="text-xs">
+                            You have 1 unread message
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-1">
-                    <div role="alert" className="alert bg-base-100 shadow-lg">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        className="stroke-info h-6 w-6 shrink-0"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
-                      <div>
-                        <h3 className="font-bold">New message!</h3>
-                        <div className="text-xs">You have 1 unread message</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-1">
+                      <div role="alert" className="alert bg-base-100 shadow-lg">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="stroke-info h-6 w-6 shrink-0"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <div>
+                          <h3 className="font-bold">New message!</h3>
+                          <div className="text-xs">
+                            You have 1 unread message
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-1">
-                    <div role="alert" className="alert bg-base-100 shadow-lg">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        className="stroke-info h-6 w-6 shrink-0"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
-                      <div>
-                        <h3 className="font-bold">New message!</h3>
-                        <div className="text-xs">You have 1 unread message</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-1">
+                      <div role="alert" className="alert bg-base-100 shadow-lg">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          className="stroke-info h-6 w-6 shrink-0"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <div>
+                          <h3 className="font-bold">New message!</h3>
+                          <div className="text-xs">
+                            You have 1 unread message
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Line Chart */}

@@ -10,7 +10,7 @@ const MainLayout = () => {
       <div className="navbar bg-base-100 px-4">
         <div className="flex-1">
           <div className="text-xl">
-            <img src={logo} className="h-20 w-20" alt="logo"/>
+            <img src={logo} className="h-14 w-14" alt="logo"/>
           </div>
         </div>
         <div className="flex-none gap-2">

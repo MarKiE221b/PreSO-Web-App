@@ -15,7 +15,7 @@ function App() {
             <MainLayout>
               <Login />
             </MainLayout>
-          }
+          } 
         />
 
         <Route path="/admin" element={<AdminLayout />}>
