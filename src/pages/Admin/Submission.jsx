@@ -4,12 +4,13 @@ import { FaRegFileAlt } from "react-icons/fa";
 
 import TableSubmission from "../../components/TableSubmission";
 import { BulkModal } from "../../components/BulkModal";
+import SingleModal from "../../components/SingleModal";
 
 const Submission = () => {
   return (
     <>
       <BulkModal />
-
+      <SingleModal />
       <div>
         {/* Top panel (dropdown and input search) */}
         <div className="flex flex-col gap-2 md:flex-row md:justify-between overflow-x-auto px-2">
@@ -54,7 +55,11 @@ const Submission = () => {
               Add Bulk
             </button>
 
-            <button className="btn btn-ghost">
+            <button
+              className="btn btn-ghost"
+              type="button"
+              onClick={() => document.getElementById("my_modal_2").showModal()}
+            >
               <FaRegFileAlt size="25px" />
               Add Single
             </button>

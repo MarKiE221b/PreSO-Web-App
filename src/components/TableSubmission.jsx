@@ -16,7 +16,7 @@ const TableSubmission = () => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
   const statusColors = {
-    Received: "badge-success",
+    Received: "badge-success bg-[#32CD32]",
     Pending: "badge-warning",
     Rejected: "badge-error",
   };
@@ -121,13 +121,13 @@ const TableSubmission = () => {
                 <td>{user.ESIncharge}</td>
                 <td>{user.DateSubmitted}</td>
                 <td>
-                  <span className={`badge ${statusColors[user.status]}`}>
+                  <span className={`badge ${statusColors[user.status]} `}>
                     {user.status}
                   </span>
                 </td>
                 <td>
                   <div className="tooltip tooltip-left" data-tip="View Details">
-                    <button className="btn btn-sm btn-circle btn-primary">
+                    <button className="btn btn-sm btn-circle btn-outline">
                       <FaEye />
                     </button>
                   </div>
