@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { FiPackage } from "react-icons/fi";
-import { FaRegFileAlt } from "react-icons/fa";
+import TableAccount from "../../components/TableAccount";
+import AddAccountModal from "../../components/AddAccountModal";
 
-import TableSubmission from "../../components/TableSubmission";
-import { BulkModal } from "../../components/BulkModal";
-import SingleModal from "../../components/SingleModal";
+import { CiCirclePlus } from "react-icons/ci";
+import { useSchoolList } from "../../hooks/useSchoolUsers";
 
-const Submission = () => {
+const AccountManagement = () => {
   const [filterStatus, setFilterStatus] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { data: schoolList } = useSchoolList();
+
   return (
     <>
-      <BulkModal />
-      <SingleModal />
+      <AddAccountModal schoolList={schoolList} />
       <div>
         {/* Top panel (dropdown and input search) */}
         <div className="flex flex-col gap-2 md:flex-row md:justify-between overflow-x-auto px-2">
@@ -58,38 +58,29 @@ const Submission = () => {
                 <option value="" selected>
                   All
                 </option>
-                <option value="Pending">Pending</option>
-                <option value="Received">Received</option>
-                <option value="Rejected">Rejected</option>
+                {schoolList?.map((list, i) => (
+                  <option key={i} value={list.school_UID}>
+                    {list.school_name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
           <div className="flex gap-2">
             <button
-              className="btn btn-neutral"
-              type="button"
-              onClick={() => document.getElementById("my_modal_1").showModal()}
-            >
-              <FiPackage size="25px" />
-              Add Bulk
-            </button>
-
-            <button
               className="btn btn-ghost"
               type="button"
-              onClick={() => document.getElementById("my_modal_2").showModal()}
+              onClick={() => document.getElementById("add_account").showModal()}
             >
-              <FaRegFileAlt size="25px" />
-              Add Single
+              <CiCirclePlus size="25px" />
+              Add Account{" "}
             </button>
           </div>
         </div>
 
-        {/* Table */}
-
         <div className="mt-5">
-          <TableSubmission
+          <TableAccount
             filterStatus={filterStatus}
             searchQuery={searchQuery}
             currentPage={currentPage}
@@ -101,4 +92,4 @@ const Submission = () => {
   );
 };
 
-export default Submission;
+export default AccountManagement;

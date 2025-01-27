@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../assets/preSo_logo.png";
 import chedLogo from "../assets/CHED-LOGO_orig (1).png";
 import { BsCloudUpload } from "react-icons/bs";
+import { MdManageAccounts } from "react-icons/md";
 
 import ThemeController from "../components/ThemeController";
 import { Link, Outlet } from "react-router";
@@ -86,7 +87,12 @@ const MainLayout = () => {
             <Link to="/admin/submission">
               <BsCloudUpload size="20px" />
               Submissions
-              <span className="badge badge-sm badge-warning">NEW</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/manage-account">
+              <MdManageAccounts size="20px" />
+              Accounts
             </Link>
           </li>
         </ul>

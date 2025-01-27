@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
+import { useSchoolUser } from "../hooks/useSchoolUsers";
 
-const TableSubmission = ({
+const TableAccount = ({
   filterStatus,
   searchQuery,
   currentPage,
   setCurrentPage,
 }) => {
-  const [data, setData] = useState(
-    Array.from({ length: 50 }, (_, i) => ({
-      id: i + 1,
-      Institution: `User ${i + 1}`,
-      Course: `Course${i + 1}`,
-      ESIncharge: `ES In-charge${i + 1}`,
-      DateSubmitted: new Date().toLocaleDateString(),
-      status: i % 3 === 0 ? "Received" : i % 3 === 1 ? "Pending" : "Rejected",
-    }))
-  );
+  // useSchoolUser hook to fetch data
+  const { data: useUserListData } = useSchoolUser();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(useUserListData?.data || []);
+  }, [useUserListData]);
+
+  // State for sorting
 
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
@@ -30,7 +30,8 @@ const TableSubmission = ({
 
   // Filter and paginate data
   const filteredData = data.filter((user) => {
-    const matchesStatus = !filterStatus || user.status === filterStatus;
+    const matchesStatus =
+      !filterStatus || user.School.school_UID === filterStatus;
     const matchesSearch = Object.values(user).some((value) =>
       value
         .toString()
@@ -87,62 +88,43 @@ const TableSubmission = ({
           {/* Table header */}
           <thead>
             <tr>
-              <th onClick={() => sortData("id")} className="cursor-pointer">
-                <p className="flex items-center">
-                  # <span className="ml-2">{getSortIcon("id")}</span>
-                </p>
-              </th>
-              <th
-                onClick={() => sortData("Institution")}
-                className="cursor-pointer"
-              >
-                <p className="flex items-center">
-                  Institution{" "}
-                  <span className="ml-2">{getSortIcon("Institution")}</span>
-                </p>
-              </th>
-              <th onClick={() => sortData("Course")} className="cursor-pointer">
-                <p className="flex items-center">
-                  Course <span className="ml-2">{getSortIcon("Course")}</span>
-                </p>
-              </th>
-              <th
-                onClick={() => sortData("ESIncharge")}
-                className="cursor-pointer"
-              >
-                <p className="flex items-center">
-                  ES In-charge{" "}
-                  <span className="ml-2">{getSortIcon("ESIncharge")}</span>
-                </p>
-              </th>
-              <th
-                onClick={() => sortData("DateSubmitted")}
-                className="cursor-pointer"
-              >
-                <p className="flex items-center">
-                  Date Submitted{" "}
-                  <span className="ml-2">{getSortIcon("DateSubmitted")}</span>
-                </p>
-              </th>
               <th>
-                <p className="flex items-center">Status</p>
+                <p className="flex items-center">Name</p>
+              </th>
+              <th
+                onClick={() => sortData("username")}
+                className="cursor-pointer"
+              >
+                <p className="flex items-center">
+                  Username{" "}
+                  <span className="ml-2">{getSortIcon("username")}</span>
+                </p>
+              </th>
+              <th className="cursor-pointer">
+                <p className="flex items-center">Institution </p>
+              </th>
+              <th
+                onClick={() => sortData("createdAt")}
+                className="cursor-pointer"
+              >
+                <p className="flex items-center">
+                  Created At{" "}
+                  <span className="ml-2">{getSortIcon("createdAt")}</span>
+                </p>
               </th>
             </tr>
           </thead>
           {/* Table body */}
           <tbody>
             {paginatedData.map((user, index) => (
-              <tr key={user.id}>
-                <th>{user.id}</th>
-                <td>{user.Institution}</td>
-                <td>{user.Course}</td>
-                <td>{user.ESIncharge}</td>
-                <td>{user.DateSubmitted}</td>
-                <td>
-                  <span className={`badge ${statusColors[user.status]} `}>
-                    {user.status}
-                  </span>
-                </td>
+              <tr key={user.school_id}>
+                <th>{`${user.lastname}, ${user.firstname} ${
+                  user.middlename ? user.middlename : ""
+                } ${user.extname ? user.extname : ""}`}</th>
+                <td>{user.username}</td>
+                <td>{user.School.school_name}</td>
+                <td>{user.createdAt}</td>
+
                 <td>
                   <div className="tooltip tooltip-left" data-tip="View Details">
                     <button className="btn btn-sm btn-circle btn-outline">
@@ -180,4 +162,4 @@ const TableSubmission = ({
   );
 };
 
-export default TableSubmission;
+export default TableAccount;

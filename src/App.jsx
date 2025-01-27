@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/Admin/Dashboard";
 import Submission from "./pages/Admin/Submission";
+import AccountManagement from "./pages/Admin/AccountManagement";
 
 function App() {
   return (
@@ -15,13 +16,16 @@ function App() {
             <MainLayout>
               <Login />
             </MainLayout>
-          } 
+          }
         />
 
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="submission" element={<Submission />} />
+          <Route path="manage-account" element={<AccountManagement />} />
         </Route>
+
+        <Route path="*" element={<div>Error</div>} />
       </Routes>
     </BrowserRouter>
   );
