@@ -1,7 +1,12 @@
 import React from "react";
 import LineChart from "../../components/LineChart";
+import { useDashboardAdminCount } from "../../hooks/useDashboard";
 
 const Dashboard = () => {
+  const { data: adminCountData } = useDashboardAdminCount();
+
+  console.log(adminCountData);
+
   return (
     <div>
       <div className="flex flex-col gap-5">
@@ -24,8 +29,12 @@ const Dashboard = () => {
               </svg>
             </div>
             <div className="stat-title">No. of Submission</div>
-            <div className="stat-value">31K</div>
-            <div className="stat-desc">Jan 1st - Feb 1st</div>
+            <div className="stat-value">
+              {adminCountData?.data.studentCount}
+            </div>
+            <div className="stat-desc">{`${
+              adminCountData?.dateStart.split("T")[0]
+            } - ${adminCountData?.dateEnd.split("T")[0]}`}</div>
           </div>
 
           <div className="stat">
@@ -45,8 +54,10 @@ const Dashboard = () => {
               </svg>
             </div>
             <div className="stat-title">Bulk Submission</div>
-            <div className="stat-value">4,200</div>
-            <div className="stat-desc">↗︎ 400 (22%)</div>
+            <div className="stat-value">{adminCountData?.data.bulkCount}</div>
+            <div className="stat-desc">{`${
+              adminCountData?.dateStart.split("T")[0]
+            } - ${adminCountData?.dateEnd.split("T")[0]}`}</div>
           </div>
 
           <div className="stat">
@@ -66,8 +77,8 @@ const Dashboard = () => {
               </svg>
             </div>
             <div className="stat-title">S.O. Received</div>
-            <div className="stat-value">1,200</div>
-            <div className="stat-desc">↘︎ 90 (14%)</div>
+            <div className="stat-value">0</div>
+            <div className="stat-desc"></div>
           </div>
 
           <div className="stat">
@@ -87,8 +98,8 @@ const Dashboard = () => {
               </svg>
             </div>
             <div className="stat-title">S.O. Rejected</div>
-            <div className="stat-value">1,200</div>
-            <div className="stat-desc">↘︎ 90 (14%)</div>
+            <div className="stat-value">0</div>
+            <div className="stat-desc"></div>
           </div>
         </div>
 

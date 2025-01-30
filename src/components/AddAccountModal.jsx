@@ -31,6 +31,7 @@ const AddAccountModal = ({ schoolList }) => {
       setShowSuccess(true);
       const timer = setTimeout(() => {
         setShowSuccess(false);
+        formRef.current.reset();
       }, 3000);
       return () => clearTimeout(timer);
     }

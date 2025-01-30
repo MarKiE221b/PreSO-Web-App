@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const DragAndDropFileUpload = () => {
-  const [file, setFile] = useState(null);
+const DragAndDropFileUpload = ({ file, setFile }) => {
+  // const [file, setFile] = useState(null);
   const [error, setError] = useState("");
 
   const handleFileChange = (event) => {
@@ -22,10 +22,10 @@ const DragAndDropFileUpload = () => {
         "application/vnd.ms-excel",
       ];
       if (validExtensions.includes(file.type)) {
-        setFile(file);
+        setFile((prev) => ({ ...prev, excelFile: file }));
         setError("");
       } else {
-        setFile(null);
+        setFile((prev) => ({ ...prev, excelFile: null }));
         setError("Only Excel files are allowed!");
       }
     }
@@ -68,6 +68,7 @@ const DragAndDropFileUpload = () => {
               accept=".xlsx,.xls"
               className="hidden"
               onChange={handleFileChange}
+              required
             />
           </div>
         )}
