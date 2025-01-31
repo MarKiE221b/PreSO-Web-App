@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import DragAndDropFileUpload from "./DragAndDropFileUpload";
-import { useUploadBulk } from "../hooks/useSubmission";
+import { useUploadBulk } from "../../hooks/useSubmission";
 
 export const BulkModal = () => {
   const formRef = React.useRef(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
-    school_id: "6796e5e390762393165e4c48",
+    school_id: localStorage.getItem("_id"),
     course: "",
     excelFile: null,
   });

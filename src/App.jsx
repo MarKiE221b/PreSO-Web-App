@@ -5,6 +5,9 @@ import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/Admin/Dashboard";
 import Submission from "./pages/Admin/Submission";
 import AccountManagement from "./pages/Admin/AccountManagement";
+import UserLayout from "./layouts/UserLayout";
+import DashboardUser from "./pages/User/DashboardUser";
+import SubmissionUser from "./pages/User/SubmissionUser";
 
 function App() {
   return (
@@ -23,6 +26,11 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="submission" element={<Submission />} />
           <Route path="manage-account" element={<AccountManagement />} />
+        </Route>
+
+        <Route path="/user" element={<UserLayout />}>
+          <Route path="dashboard" element={<DashboardUser />} />
+          <Route path="submission" element={<SubmissionUser />} />
         </Route>
 
         <Route path="*" element={<div>Error</div>} />

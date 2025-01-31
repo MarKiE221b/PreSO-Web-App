@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import logo from "../assets/preSo_logo.png";
 import chedLogo from "../assets/CHED-LOGO_orig (1).png";
 import { BsCloudUpload } from "react-icons/bs";
-import { MdManageAccounts } from "react-icons/md";
 
-import ThemeController from "../components/ThemeController";
+import ThemeController from "../components/user/ThemeController";
 import { Link, Outlet, useNavigate } from "react-router";
 import { useVerifyToken } from "../hooks/useAuthentication";
 
-const MainLayout = () => {
+const UserLayout = () => {
   const {
     mutateAsync: verifyMutation,
     isPending: pendingMutation,
@@ -23,8 +22,7 @@ const MainLayout = () => {
         const payload = await verifyMutation({
           token: localStorage.getItem("ACCESSTOKEN"),
         });
-
-        if (payload.payload.role !== "Admin") {
+        if (payload.payload.role !== "User") {
           navigate("/");
         }
       } catch (error) {
@@ -107,7 +105,7 @@ const MainLayout = () => {
         <div className="mx-4 mt-4">
           <ul className="menu bg-base-200 lg:menu-horizontal rounded-box">
             <li>
-              <Link to="/admin/dashboard">
+              <Link to="/user/dashboard">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -127,15 +125,9 @@ const MainLayout = () => {
               </Link>
             </li>
             <li>
-              <Link to="/admin/submission">
+              <Link to="/user/submission">
                 <BsCloudUpload size="20px" />
                 Submissions
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/manage-account">
-                <MdManageAccounts size="20px" />
-                Accounts
               </Link>
             </li>
           </ul>
@@ -159,4 +151,4 @@ const MainLayout = () => {
     );
 };
 
-export default MainLayout;
+export default UserLayout;

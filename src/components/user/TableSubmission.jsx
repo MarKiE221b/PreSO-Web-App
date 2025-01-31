@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaEye, FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
+import { useReactToPrint } from "react-to-print";
+import BarcodePrintPage from "../printable/BarcodePrintPage";
+
+import { TiPrinter } from "react-icons/ti";
 
 const TableSubmission = ({
   filterStatus,
@@ -11,6 +15,8 @@ const TableSubmission = ({
   setSearchParams,
 }) => {
   const [data, setData] = useState([]);
+  const [printData, setPrintData] = useState(null);
+  const contentRef = useRef(null);
 
   useEffect(() => {
     if (fetchData?.data && Array.isArray(fetchData.data)) {
@@ -47,7 +53,6 @@ const TableSubmission = ({
   const filteredData = data.filter((user) => {
     const matchesStatus = !filterStatus || user.status === filterStatus;
     const matchesSearch = Object.entries(user).some(([key, value]) => {
-      // Exclude barcode_image and students from search
       if (key === "barcode_image" || key === "students") return false;
       return value
         .toString()
@@ -100,8 +105,25 @@ const TableSubmission = ({
     setSearchParams({ page: newPage });
   };
 
+  const handePrintBarcodeDoc = (values) => {
+    setPrintData(values);
+
+    setTimeout(() => {
+      print();
+    }, 1000);
+  };
+
+  const print = useReactToPrint({
+    contentRef,
+    documentTitle: "Application Leave Form",
+  });
+
   return (
     <>
+      <div className="hidden">
+        {printData && <BarcodePrintPage ref={contentRef} data={printData} />}
+      </div>
+
       <div className="p-4 bg-base-100 rounded-xl shadow-lg">
         <h2 className="text-lg font-semibold mb-4">Submissions</h2>
         <div className="overflow-x-auto">
@@ -182,6 +204,18 @@ const TableSubmission = ({
                         onClick={() => handleViewRow(user.id)}
                       >
                         <FaEye />
+                      </button>
+                    </div>
+                    <div
+                      className="tooltip tooltip-left"
+                      data-tip="Print Barcodes"
+                    >
+                      <button
+                        className="btn btn-sm btn-circle btn-outline"
+                        type="button"
+                        onClick={() => handePrintBarcodeDoc(user)}
+                      >
+                        <TiPrinter />
                       </button>
                     </div>
                   </td>

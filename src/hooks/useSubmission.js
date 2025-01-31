@@ -4,6 +4,7 @@ import {
   fetchBulk,
   updateBulkStatus,
   updateStudentStatus,
+  fetchBulkUser,
 } from "../api/submission";
 
 export const useUploadBulk = (setFormData) => {
@@ -16,12 +17,12 @@ export const useUploadBulk = (setFormData) => {
 
     onSuccess: () => {
       setFormData({
-        school_id: "6796e5e390762393165e4c48",
+        school_id: "",
         course: "",
         excelFile: null,
       });
 
-      queryClient.invalidateQueries({ queryKey: ["bulk"] });
+      queryClient.invalidateQueries({ queryKey: ["bulk-user"] });
     },
   });
 };
@@ -42,6 +43,10 @@ export const useUpdateBulkStatus = () => {
       queryClient.invalidateQueries({ queryKey: ["bulk"] });
     },
   });
+};
+
+export const useFetchBulkPerUser = () => {
+  return useQuery({ queryKey: ["bulk-user"], queryFn: fetchBulkUser });
 };
 
 export const useUpdateStudentStatus = () => {

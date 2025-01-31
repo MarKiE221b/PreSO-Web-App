@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { FiPackage } from "react-icons/fi";
-
-import TableSubmission from "../../components/TableSubmission";
-import TableSubmissionStudents from "../../components/TableSubmissionStudents";
-
 import { Link, useSearchParams } from "react-router";
-import { useFetchBulk } from "../../hooks/useSubmission";
-import BarcodeScanModal from "./../../components/BarcodeScanModal";
-import BarcodeScanStudentModal from "../../components/BarcodeScanStudentModal";
 
-const Submission = () => {
+import { FiPackage } from "react-icons/fi";
+import { FaRegFileAlt } from "react-icons/fa";
+
+import TableSubmission from "../../components/user/TableSubmission";
+import TableSubmissionStudents from "../../components/user/TableSubmissionStudents";
+import SingleModal from "../../components/user/SingleModal";
+import { BulkModal } from "../../components/user/BulkModal";
+import { useFetchBulkPerUser } from "../../hooks/useSubmission";
+
+const SubmissionUser = () => {
   // state for main panel
   const [filterStatus, setFilterStatus] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,7 +27,8 @@ const Submission = () => {
   const page = searchParams.get("page");
 
   // fetch query
-  const { data: bulkData, isSuccess: queryFetchIsSuccess } = useFetchBulk();
+  const { data: bulkData, isSuccess: queryFetchIsSuccess } =
+    useFetchBulkPerUser();
 
   // setting up filtered Data
   useEffect(() => {
@@ -40,13 +42,13 @@ const Submission = () => {
 
   return (
     <>
-      <BarcodeScanModal />
-      <BarcodeScanStudentModal />
+      <BulkModal />
+      <SingleModal />
       {/* Breadcrumbs */}
       <div className="breadcrumbs text-sm mb-2 ml-3">
         <ul>
           <li>
-            <Link to="/admin/submission">Submission</Link>
+            <Link to="/user/submission">Submission</Link>
           </li>
           <li>
             <p>{page}</p>
@@ -99,24 +101,34 @@ const Submission = () => {
                   <option value="" selected>
                     All
                   </option>
-                  <option value="Pending">Pending</option>
-                  <option value="Received">Received</option>
-                  <option value="Rejected">Rejected</option>
+                  <option value="pending">Pending</option>
+                  <option value="received">Received</option>
+                  <option value="rejected">Rejected</option>
                 </select>
               </div>
             </div>
 
-            {/* barcode scan modal button */}
-            <div>
+            <div className="flex gap-2">
               <button
                 className="btn btn-neutral"
                 type="button"
                 onClick={() =>
-                  document.getElementById("barcode_modal").showModal()
+                  document.getElementById("my_modal_1").showModal()
                 }
               >
                 <FiPackage size="25px" />
-                Scan Barcode
+                Add Bulk
+              </button>
+
+              <button
+                className="btn btn-ghost"
+                type="button"
+                onClick={() =>
+                  document.getElementById("my_modal_2").showModal()
+                }
+              >
+                <FaRegFileAlt size="25px" />
+                Add Single
               </button>
             </div>
           </div>
@@ -186,19 +198,6 @@ const Submission = () => {
                 </select>
               </div>
             </div>
-
-            <div>
-              <button
-                className="btn btn-neutral"
-                type="button"
-                onClick={() =>
-                  document.getElementById("barcode_modal_student").showModal()
-                }
-              >
-                <FiPackage size="25px" />
-                Scan Barcode
-              </button>
-            </div>
           </div>
 
           {/* Table */}
@@ -218,4 +217,4 @@ const Submission = () => {
   );
 };
 
-export default Submission;
+export default SubmissionUser;
