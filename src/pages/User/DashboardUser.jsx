@@ -1,12 +1,10 @@
 import React from "react";
 import LineChart from "../../components/user/LineChart";
-import { useDashboardAdminCount } from "../../hooks/useDashboard";
+import { useDashboardSchoolCount } from "../../hooks/useDashboard";
 
 const DashboardUser = () => {
   // change to user specific
-  const { data: adminCountData } = useDashboardAdminCount();
-
-  console.log(adminCountData);
+  const { data: adminCountData } = useDashboardSchoolCount();
 
   return (
     <div>
@@ -78,7 +76,7 @@ const DashboardUser = () => {
               </svg>
             </div>
             <div className="stat-title">S.O. Received</div>
-            <div className="stat-value">0</div>
+            <div className="stat-value">{adminCountData?.data.studentReceivedCount}</div>
             <div className="stat-desc"></div>
           </div>
 

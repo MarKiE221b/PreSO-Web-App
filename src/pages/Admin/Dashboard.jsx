@@ -5,8 +5,6 @@ import { useDashboardAdminCount } from "../../hooks/useDashboard";
 const Dashboard = () => {
   const { data: adminCountData } = useDashboardAdminCount();
 
-  console.log(adminCountData);
-
   return (
     <div>
       <div className="flex flex-col gap-5">
@@ -77,7 +75,9 @@ const Dashboard = () => {
               </svg>
             </div>
             <div className="stat-title">S.O. Received</div>
-            <div className="stat-value">0</div>
+            <div className="stat-value">
+              {adminCountData?.data.studentReceivedCount}
+            </div>
             <div className="stat-desc"></div>
           </div>
 
@@ -222,7 +222,9 @@ const Dashboard = () => {
           {/* Line Chart */}
 
           <div className="overflow-x-auto">
-            <LineChart />
+            <LineChart
+              fetchedData={adminCountData ? adminCountData : {}}
+            />
           </div>
         </div>
       </div>

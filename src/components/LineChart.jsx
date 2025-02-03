@@ -22,14 +22,30 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = () => {
+const LineChart = ({ fetchedData }) => {
+  console.log(fetchedData);
   // Chart data
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
     datasets: [
       {
-        label: "Sales",
-        data: [10, 20, 15, 25, 30, 45, 60],
+        label: `S.O. Received ${
+          fetchedData?.data ? fetchedData?.data.year : ""
+        }`,
+        data: fetchedData?.data ? fetchedData.data.monthlyCounts : [],
         borderColor: "#4CAF50", // Tailwind green
         backgroundColor: "rgba(76, 175, 80, 0.2)",
         pointBackgroundColor: "#4CAF50",
@@ -71,7 +87,9 @@ const LineChart = () => {
 
   return (
     <div className="p-4 bg-base-100 rounded-xl shadow-lg">
-      <h2 className="text-lg font-bold text-center mb-4">Monthly Sales Data</h2>
+      <h2 className="text-lg font-bold text-center mb-4">
+        Monthly Received SO
+      </h2>
       <Line data={data} options={options} />
     </div>
   );

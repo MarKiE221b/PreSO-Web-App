@@ -116,6 +116,17 @@ const TableSubmission = ({
   const print = useReactToPrint({
     contentRef,
     documentTitle: "Application Leave Form",
+    pageStyle: `
+      @page {
+        size: A4 landscape;
+        margin: 2.5rem;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        } 
+      }`,
   });
 
   return (
@@ -124,7 +135,7 @@ const TableSubmission = ({
         {printData && <BarcodePrintPage ref={contentRef} data={printData} />}
       </div>
 
-      <div className="p-4 bg-base-100 rounded-xl shadow-lg">
+      <div className="p-4 bg-base-100 rounded-xl shadow-lg break">
         <h2 className="text-lg font-semibold mb-4">Submissions</h2>
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full">

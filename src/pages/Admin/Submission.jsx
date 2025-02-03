@@ -33,8 +33,6 @@ const Submission = () => {
     if (bulkData && queryFetchIsSuccess) {
       const filtered = bulkData.data.find((obj) => obj.bulk_id === page);
       setFilteredData(filtered);
-
-      console.log("Filtered Data:", filtered);
     }
   }, [page, bulkData, queryFetchIsSuccess]);
 
@@ -96,12 +94,10 @@ const Submission = () => {
                   }}
                   className="select select-bordered"
                 >
-                  <option value="" selected>
-                    All
-                  </option>
-                  <option value="Pending">Pending</option>
-                  <option value="Received">Received</option>
-                  <option value="Rejected">Rejected</option>
+                  <option value="">All</option>
+                  <option value="pending">Pending</option>
+                  <option value="received">Received</option>
+                  <option value="rejected">Rejected</option>
                 </select>
               </div>
             </div>
@@ -187,18 +183,20 @@ const Submission = () => {
               </div>
             </div>
 
-            <div>
-              <button
-                className="btn btn-neutral"
-                type="button"
-                onClick={() =>
-                  document.getElementById("barcode_modal_student").showModal()
-                }
-              >
-                <FiPackage size="25px" />
-                Scan Barcode
-              </button>
-            </div>
+            {filteredData?.status === "received" && (
+              <div>
+                <button
+                  className="btn btn-neutral"
+                  type="button"
+                  onClick={() =>
+                    document.getElementById("barcode_modal_student").showModal()
+                  }
+                >
+                  <FiPackage size="25px" />
+                  Scan Barcode
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Table */}

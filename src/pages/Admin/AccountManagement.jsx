@@ -55,7 +55,7 @@ const AccountManagement = () => {
                 }}
                 className="select select-bordered"
               >
-                <option value="" selected>
+                <option value="">
                   All
                 </option>
                 {schoolList?.map((list, i) => (

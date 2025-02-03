@@ -35,8 +35,6 @@ const SubmissionUser = () => {
     if (bulkData && queryFetchIsSuccess) {
       const filtered = bulkData.data.find((obj) => obj.bulk_id === page);
       setFilteredData(filtered);
-
-      console.log("Filtered Data:", filtered);
     }
   }, [page, bulkData, queryFetchIsSuccess]);
 
@@ -98,7 +96,7 @@ const SubmissionUser = () => {
                   }}
                   className="select select-bordered"
                 >
-                  <option value="" selected>
+                  <option value="">
                     All
                   </option>
                   <option value="pending">Pending</option>

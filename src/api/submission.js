@@ -11,6 +11,16 @@ export const uploadBulk = async (data) => {
   return response;
 };
 
+export const uploadSingle = async (data) => {
+  const { data: response } = await makeRequest.post("/upload-single", data, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("ACCESSTOKEN")}`,
+    },
+  });
+
+  return response;
+};
+
 export const fetchBulk = async () => {
   const { data } = await makeRequest.get("/get-submissions", {
     headers: {

@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   uploadBulk,
+  uploadSingle,
   fetchBulk,
   updateBulkStatus,
   updateStudentStatus,
@@ -22,6 +23,20 @@ export const useUploadBulk = (setFormData) => {
         excelFile: null,
       });
 
+      queryClient.invalidateQueries({ queryKey: ["bulk-user"] });
+    },
+  });
+};
+
+export const useUploadSingle = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data) => {
+      return uploadSingle(data);
+    },
+
+    onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["bulk-user"] });
     },
   });
