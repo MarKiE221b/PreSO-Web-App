@@ -57,7 +57,7 @@ const Submission = () => {
         <div>
           {/* Top panel (dropdown and input search) */}
           <div className="flex flex-col gap-2 md:flex-row md:justify-between overflow-x-auto px-2">
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
               <div>
                 <label className="input input-bordered flex items-center gap-2">
                   <input
@@ -85,14 +85,14 @@ const Submission = () => {
                 </label>
               </div>
 
-              <div className="w-full max-w-xs">
+              <div className="w-full md:max-w-xs">
                 <select
                   value={filterStatus}
                   onChange={(e) => {
                     setFilterStatus(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="select select-bordered"
+                  className="select select-bordered w-full"
                 >
                   <option value="">All</option>
                   <option value="pending">Pending</option>

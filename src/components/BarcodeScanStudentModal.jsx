@@ -31,7 +31,6 @@ const BarcodeScanStudentModal = () => {
       } catch (error) {
         setBarcode("");
         setStatus(`❌ ${error.response.data.message} `);
-        console.error(error); // Log error for debugging
       }
       inputRef.current?.focus(); // Refocus input field
     }

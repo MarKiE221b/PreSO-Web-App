@@ -23,7 +23,6 @@ ChartJS.register(
 );
 
 const LineChart = ({ fetchedData }) => {
-  console.log(fetchedData);
   // Chart data
   const data = {
     labels: [

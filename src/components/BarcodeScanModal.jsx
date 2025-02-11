@@ -32,7 +32,9 @@ const BarcodeScanModal = () => {
         document.getElementById("barcode_modal").close();
       } catch (error) {
         setBarcode("");
-        setStatus("❌ Error updating ID: " + barcode);
+        setStatus(
+          `❌ Error updating ID: ${barcode}. ${error.response.data.message}`
+        );
         console.error(error); // Log error for debugging
       }
       inputRef.current?.focus(); // Refocus input field

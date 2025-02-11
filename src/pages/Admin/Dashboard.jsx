@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LineChart from "../../components/LineChart";
 import { useDashboardAdminCount } from "../../hooks/useDashboard";
 
 const Dashboard = () => {
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const eventSource = new EventSource(
+      `http://10.40.2.35:8000/get-notification?token=${localStorage.getItem(
+        "ACCESSTOKEN"
+      )}`
+    );
+
+    eventSource.onmessage = (event) => {
+      const newNotification = JSON.parse(event.data);
+      setNotifications((prev) => [...prev, newNotification]);
+    };
+
+    eventSource.onerror = (error) => {
+      console.error("SSE Error:", error);
+      eventSource.close();
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
   const { data: adminCountData } = useDashboardAdminCount();
 
   return (
@@ -113,107 +137,33 @@ const Dashboard = () => {
                 <thead></thead>
                 <tbody>
                   {/* row 1 */}
-                  <tr>
-                    <td className="py-1">
-                      <div role="alert" className="alert bg-base-100 shadow-lg">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          className="stroke-info h-6 w-6 shrink-0"
+                  {notifications.map((row, key) => (
+                    <tr key={key}>
+                      <td className="py-1">
+                        <div
+                          role="alert"
+                          className="alert bg-base-100 shadow-lg"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <div>
-                          <h3 className="font-bold">New message!</h3>
-                          <div className="text-xs">
-                            You have 1 unread message
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            className="stroke-info h-6 w-6 shrink-0"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                          </svg>
+                          <div>
+                            <div className="text-xs">{row.message}</div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className="py-1">
-                      <div role="alert" className="alert bg-base-100 shadow-lg">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          className="stroke-info h-6 w-6 shrink-0"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <div>
-                          <h3 className="font-bold">New message!</h3>
-                          <div className="text-xs">
-                            You have 1 unread message
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-1">
-                      <div role="alert" className="alert bg-base-100 shadow-lg">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          className="stroke-info h-6 w-6 shrink-0"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <div>
-                          <h3 className="font-bold">New message!</h3>
-                          <div className="text-xs">
-                            You have 1 unread message
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-1">
-                      <div role="alert" className="alert bg-base-100 shadow-lg">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          className="stroke-info h-6 w-6 shrink-0"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <div>
-                          <h3 className="font-bold">New message!</h3>
-                          <div className="text-xs">
-                            You have 1 unread message
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -222,9 +172,7 @@ const Dashboard = () => {
           {/* Line Chart */}
 
           <div className="overflow-x-auto">
-            <LineChart
-              fetchedData={adminCountData ? adminCountData : {}}
-            />
+            <LineChart fetchedData={adminCountData ? adminCountData : {}} />
           </div>
         </div>
       </div>
